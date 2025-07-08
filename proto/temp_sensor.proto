@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "servant/proto;proto";
+
+service TempSensorService {
+  rpc CreateTempSensor (CreateTempSensorReq) returns (CreateTempSensorRes);
+}
+
+message CreateTempSensorReq {
+  string id = 1;
+  float temperature = 2;
+  float humidity = 3;
+}
+
+message CreateTempSensorRes {
+  string status = 1;
+}
