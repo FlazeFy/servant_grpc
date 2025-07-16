@@ -34,3 +34,27 @@ func (s *tempSensorService) CreateTempSensor(ctx context.Context, req *proto.Cre
 
 	return &proto.CreateTempSensorRes{Status: "success"}, nil
 }
+
+func (s *tempSensorService) GetAllTempSensors(ctx context.Context) (*proto.GetAllTempSensorRes, error) {
+	// Repository
+	sensors, err := s.repo.FindAllTempSensor(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	// Map to Proto
+	var protoSensors []*proto.TempSensor
+	for _, r := range sensors {
+		protoSensors = append(protoSensors, &proto.TempSensor{
+			Id:          r.ID,
+			Timestamp:   r.Timestamp.Format(time.RFC3339),
+			Temperature: r.Temperature,
+			Humidity:    r.Humidity,
+		})
+	}
+
+	return &proto.GetAllTempSensorRes{
+		Status:  "success",
+		Sensors: protoSensors,
+	}, nil
+}

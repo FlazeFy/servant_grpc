@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"servant/servant/proto"
+	"servant/utils"
 
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
@@ -26,16 +27,27 @@ func main() {
 	}
 	defer conn.Close()
 
-	// Test Add Temp Sensor
 	client := proto.NewTempSensorServiceClient(conn)
-	resp, err := client.CreateTempSensor(context.Background(), &proto.CreateTempSensorReq{
+
+	// Service : Create Temp Sensor
+	createResp, err := client.CreateTempSensor(context.Background(), &proto.CreateTempSensorReq{
 		Id:          "TEST001",
-		Temperature: 25.4,
-		Humidity:    70.2,
+		Temperature: float32(utils.GenerateRandomTemp()),
+		Humidity:    float32(utils.GenerateRandomHumid()),
 	})
 	if err != nil {
 		log.Fatalf("Error calling CreateTempSensor: %v", err)
 	}
+	log.Printf("CreateTempSensor response: %s", createResp.Status)
 
-	log.Printf("Response: %s", resp.Status)
+	// Service : Get All Temp Sensor
+	getResp, err := client.GetAllTempSensor(context.Background(), &proto.GetAllTempSensorReq{})
+	if err != nil {
+		log.Fatalf("Error calling GetAllTempSensor: %v", err)
+	}
+	log.Printf("GetAllTempSensor response status: %s", getResp.Status)
+	for _, sensor := range getResp.Sensors {
+		log.Printf("Sensor - ID: %s, Timestamp: %s, Temp: %.2f, Humidity: %.2f",
+			sensor.Id, sensor.Timestamp, sensor.Temperature, sensor.Humidity)
+	}
 }

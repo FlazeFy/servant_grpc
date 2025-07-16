@@ -125,6 +125,162 @@ func (x *CreateTempSensorRes) GetStatus() string {
 	return ""
 }
 
+type GetAllTempSensorReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAllTempSensorReq) Reset() {
+	*x = GetAllTempSensorReq{}
+	mi := &file_proto_temp_sensor_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAllTempSensorReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAllTempSensorReq) ProtoMessage() {}
+
+func (x *GetAllTempSensorReq) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_temp_sensor_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAllTempSensorReq.ProtoReflect.Descriptor instead.
+func (*GetAllTempSensorReq) Descriptor() ([]byte, []int) {
+	return file_proto_temp_sensor_proto_rawDescGZIP(), []int{2}
+}
+
+type GetAllTempSensorRes struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	Sensors       []*TempSensor          `protobuf:"bytes,2,rep,name=sensors,proto3" json:"sensors,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetAllTempSensorRes) Reset() {
+	*x = GetAllTempSensorRes{}
+	mi := &file_proto_temp_sensor_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetAllTempSensorRes) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAllTempSensorRes) ProtoMessage() {}
+
+func (x *GetAllTempSensorRes) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_temp_sensor_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAllTempSensorRes.ProtoReflect.Descriptor instead.
+func (*GetAllTempSensorRes) Descriptor() ([]byte, []int) {
+	return file_proto_temp_sensor_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetAllTempSensorRes) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *GetAllTempSensorRes) GetSensors() []*TempSensor {
+	if x != nil {
+		return x.Sensors
+	}
+	return nil
+}
+
+type TempSensor struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Timestamp     string                 `protobuf:"bytes,2,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Temperature   float32                `protobuf:"fixed32,3,opt,name=temperature,proto3" json:"temperature,omitempty"`
+	Humidity      float32                `protobuf:"fixed32,4,opt,name=humidity,proto3" json:"humidity,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TempSensor) Reset() {
+	*x = TempSensor{}
+	mi := &file_proto_temp_sensor_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TempSensor) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TempSensor) ProtoMessage() {}
+
+func (x *TempSensor) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_temp_sensor_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TempSensor.ProtoReflect.Descriptor instead.
+func (*TempSensor) Descriptor() ([]byte, []int) {
+	return file_proto_temp_sensor_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *TempSensor) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *TempSensor) GetTimestamp() string {
+	if x != nil {
+		return x.Timestamp
+	}
+	return ""
+}
+
+func (x *TempSensor) GetTemperature() float32 {
+	if x != nil {
+		return x.Temperature
+	}
+	return 0
+}
+
+func (x *TempSensor) GetHumidity() float32 {
+	if x != nil {
+		return x.Humidity
+	}
+	return 0
+}
+
 var File_proto_temp_sensor_proto protoreflect.FileDescriptor
 
 const file_proto_temp_sensor_proto_rawDesc = "" +
@@ -135,9 +291,20 @@ const file_proto_temp_sensor_proto_rawDesc = "" +
 	"\vtemperature\x18\x02 \x01(\x02R\vtemperature\x12\x1a\n" +
 	"\bhumidity\x18\x03 \x01(\x02R\bhumidity\"-\n" +
 	"\x13CreateTempSensorRes\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\tR\x06status2_\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\"\x15\n" +
+	"\x13GetAllTempSensorReq\"Z\n" +
+	"\x13GetAllTempSensorRes\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\x12+\n" +
+	"\asensors\x18\x02 \x03(\v2\x11.proto.TempSensorR\asensors\"x\n" +
+	"\n" +
+	"TempSensor\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1c\n" +
+	"\ttimestamp\x18\x02 \x01(\tR\ttimestamp\x12 \n" +
+	"\vtemperature\x18\x03 \x01(\x02R\vtemperature\x12\x1a\n" +
+	"\bhumidity\x18\x04 \x01(\x02R\bhumidity2\xab\x01\n" +
 	"\x11TempSensorService\x12J\n" +
-	"\x10CreateTempSensor\x12\x1a.proto.CreateTempSensorReq\x1a\x1a.proto.CreateTempSensorResB\x15Z\x13servant/proto;protob\x06proto3"
+	"\x10CreateTempSensor\x12\x1a.proto.CreateTempSensorReq\x1a\x1a.proto.CreateTempSensorRes\x12J\n" +
+	"\x10GetAllTempSensor\x12\x1a.proto.GetAllTempSensorReq\x1a\x1a.proto.GetAllTempSensorResB\x15Z\x13servant/proto;protob\x06proto3"
 
 var (
 	file_proto_temp_sensor_proto_rawDescOnce sync.Once
@@ -151,19 +318,25 @@ func file_proto_temp_sensor_proto_rawDescGZIP() []byte {
 	return file_proto_temp_sensor_proto_rawDescData
 }
 
-var file_proto_temp_sensor_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_proto_temp_sensor_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_proto_temp_sensor_proto_goTypes = []any{
 	(*CreateTempSensorReq)(nil), // 0: proto.CreateTempSensorReq
 	(*CreateTempSensorRes)(nil), // 1: proto.CreateTempSensorRes
+	(*GetAllTempSensorReq)(nil), // 2: proto.GetAllTempSensorReq
+	(*GetAllTempSensorRes)(nil), // 3: proto.GetAllTempSensorRes
+	(*TempSensor)(nil),          // 4: proto.TempSensor
 }
 var file_proto_temp_sensor_proto_depIdxs = []int32{
-	0, // 0: proto.TempSensorService.CreateTempSensor:input_type -> proto.CreateTempSensorReq
-	1, // 1: proto.TempSensorService.CreateTempSensor:output_type -> proto.CreateTempSensorRes
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	4, // 0: proto.GetAllTempSensorRes.sensors:type_name -> proto.TempSensor
+	0, // 1: proto.TempSensorService.CreateTempSensor:input_type -> proto.CreateTempSensorReq
+	2, // 2: proto.TempSensorService.GetAllTempSensor:input_type -> proto.GetAllTempSensorReq
+	1, // 3: proto.TempSensorService.CreateTempSensor:output_type -> proto.CreateTempSensorRes
+	3, // 4: proto.TempSensorService.GetAllTempSensor:output_type -> proto.GetAllTempSensorRes
+	3, // [3:5] is the sub-list for method output_type
+	1, // [1:3] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_proto_temp_sensor_proto_init() }
@@ -177,7 +350,7 @@ func file_proto_temp_sensor_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_temp_sensor_proto_rawDesc), len(file_proto_temp_sensor_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

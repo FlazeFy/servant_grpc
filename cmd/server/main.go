@@ -20,8 +20,12 @@ type handler struct {
 	service service.TempSensorService
 }
 
+// Service
 func (h *handler) CreateTempSensor(ctx context.Context, req *proto.CreateTempSensorReq) (*proto.CreateTempSensorRes, error) {
 	return h.service.CreateTempSensor(ctx, req)
+}
+func (h *handler) GetAllTempSensor(ctx context.Context, req *proto.GetAllTempSensorReq) (*proto.GetAllTempSensorRes, error) {
+	return h.service.GetAllTempSensors(ctx)
 }
 
 func main() {

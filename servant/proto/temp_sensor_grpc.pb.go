@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	TempSensorService_CreateTempSensor_FullMethodName = "/proto.TempSensorService/CreateTempSensor"
+	TempSensorService_GetAllTempSensor_FullMethodName = "/proto.TempSensorService/GetAllTempSensor"
 )
 
 // TempSensorServiceClient is the client API for TempSensorService service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TempSensorServiceClient interface {
 	CreateTempSensor(ctx context.Context, in *CreateTempSensorReq, opts ...grpc.CallOption) (*CreateTempSensorRes, error)
+	GetAllTempSensor(ctx context.Context, in *GetAllTempSensorReq, opts ...grpc.CallOption) (*GetAllTempSensorRes, error)
 }
 
 type tempSensorServiceClient struct {
@@ -47,11 +49,22 @@ func (c *tempSensorServiceClient) CreateTempSensor(ctx context.Context, in *Crea
 	return out, nil
 }
 
+func (c *tempSensorServiceClient) GetAllTempSensor(ctx context.Context, in *GetAllTempSensorReq, opts ...grpc.CallOption) (*GetAllTempSensorRes, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAllTempSensorRes)
+	err := c.cc.Invoke(ctx, TempSensorService_GetAllTempSensor_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TempSensorServiceServer is the server API for TempSensorService service.
 // All implementations must embed UnimplementedTempSensorServiceServer
 // for forward compatibility.
 type TempSensorServiceServer interface {
 	CreateTempSensor(context.Context, *CreateTempSensorReq) (*CreateTempSensorRes, error)
+	GetAllTempSensor(context.Context, *GetAllTempSensorReq) (*GetAllTempSensorRes, error)
 	mustEmbedUnimplementedTempSensorServiceServer()
 }
 
@@ -64,6 +77,9 @@ type UnimplementedTempSensorServiceServer struct{}
 
 func (UnimplementedTempSensorServiceServer) CreateTempSensor(context.Context, *CreateTempSensorReq) (*CreateTempSensorRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTempSensor not implemented")
+}
+func (UnimplementedTempSensorServiceServer) GetAllTempSensor(context.Context, *GetAllTempSensorReq) (*GetAllTempSensorRes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllTempSensor not implemented")
 }
 func (UnimplementedTempSensorServiceServer) mustEmbedUnimplementedTempSensorServiceServer() {}
 func (UnimplementedTempSensorServiceServer) testEmbeddedByValue()                           {}
@@ -104,6 +120,24 @@ func _TempSensorService_CreateTempSensor_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TempSensorService_GetAllTempSensor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllTempSensorReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TempSensorServiceServer).GetAllTempSensor(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TempSensorService_GetAllTempSensor_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TempSensorServiceServer).GetAllTempSensor(ctx, req.(*GetAllTempSensorReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TempSensorService_ServiceDesc is the grpc.ServiceDesc for TempSensorService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +148,10 @@ var TempSensorService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateTempSensor",
 			Handler:    _TempSensorService_CreateTempSensor_Handler,
+		},
+		{
+			MethodName: "GetAllTempSensor",
+			Handler:    _TempSensorService_GetAllTempSensor_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

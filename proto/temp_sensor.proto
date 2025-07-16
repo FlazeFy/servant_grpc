@@ -6,6 +6,7 @@ option go_package = "servant/proto;proto";
 
 service TempSensorService {
   rpc CreateTempSensor (CreateTempSensorReq) returns (CreateTempSensorRes);
+  rpc GetAllTempSensor (GetAllTempSensorReq) returns (GetAllTempSensorRes);
 }
 
 message CreateTempSensorReq {
@@ -13,7 +14,18 @@ message CreateTempSensorReq {
   float temperature = 2;
   float humidity = 3;
 }
-
 message CreateTempSensorRes {
   string status = 1;
+}
+
+message GetAllTempSensorReq {}
+message GetAllTempSensorRes {
+  string status = 1;
+  repeated TempSensor sensors = 2;
+}
+message TempSensor {
+  string id = 1;
+  string timestamp = 2;
+  float temperature = 3;
+  float humidity = 4;
 }
